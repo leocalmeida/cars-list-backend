@@ -1,11 +1,8 @@
 import { Router } from "express";
-
-import BrandController from "../controllers/BrandController";
-const brandController = new BrandController();
+import brandRouter from "./brands.routes";
 
 const routes = Router();
 
-routes.post("/api/brands", brandController.create);
-routes.get("/api/brands", brandController.index);
+routes.use("/api/brands", brandRouter);
 
 export default routes;
