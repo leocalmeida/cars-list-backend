@@ -1,8 +1,8 @@
 import { Router } from "express";
-import { getCustomRepository } from "typeorm";
+import { getRepository } from "typeorm";
 
-import BrandRepository from "../repositories/BrandRepository";
 import CreateNewBrand from "../services/CreateNewBrand";
+import Brand from "../models/Brand";
 
 const brandRouter = Router();
 
@@ -18,7 +18,7 @@ brandRouter.post("/", async (request, response) => {
 });
 
 brandRouter.get("/", async (request, response) => {
-  const brandRepository = getCustomRepository(BrandRepository);
+  const brandRepository = getRepository(Brand);
   const brands = await brandRepository.find();
 
   return response.json(brands);

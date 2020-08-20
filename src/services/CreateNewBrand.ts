@@ -1,6 +1,5 @@
-import { getCustomRepository } from "typeorm";
+import { getRepository } from "typeorm";
 import Brand from "../models/Brand";
-import BrandRepository from "../repositories/BrandRepository";
 
 interface Request {
   name: string;
@@ -8,13 +7,12 @@ interface Request {
 
 class CreateNewBrand {
   public async execute({ name }: Request): Promise<Brand> {
-    const brandRepository = getCustomRepository(BrandRepository);
+    const brandRepository = getRepository(Brand);
 
     const brand = brandRepository.create({
       name,
     });
 
-    console.log("brand", brand);
     await brandRepository.save(brand);
 
     return brand;
