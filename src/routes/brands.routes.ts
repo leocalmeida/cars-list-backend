@@ -16,7 +16,10 @@ brandRouter.post("/", async (request, response) => {
   });
   return response.json(brand);
 });
+brandRouter.put("/:id", async (request, response) => {});
+brandRouter.delete("/:id", async (request, response) => {});
 
+brandRouter.get("/:id", async (request, response) => {});
 brandRouter.get("/", async (request, response) => {
   const brandRepository = getRepository(Brand);
   const brands = await brandRepository.find();

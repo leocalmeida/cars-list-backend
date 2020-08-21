@@ -23,6 +23,10 @@ vehicleRouter.post("/", async (request, response) => {
   return response.json(vehicle);
 });
 
+vehicleRouter.put("/:id", async (request, response) => {});
+vehicleRouter.delete("/:id", async (request, response) => {});
+vehicleRouter.get("/:id", async (request, response) => {});
+
 vehicleRouter.get("/", async (request, response) => {
   const vehicleRepository = getRepository(Vehicle);
   const vehicles = await vehicleRepository.find();

@@ -20,6 +20,10 @@ modelRouter.post("/", async (request, response) => {
   return response.json(model);
 });
 
+modelRouter.put("/:id", async (request, response) => {});
+modelRouter.delete("/:id", async (request, response) => {});
+modelRouter.get("/:id", async (request, response) => {});
+
 modelRouter.get("/", async (request, response) => {
   const modelRepository = getRepository(Model);
   const models = await modelRepository.find();
