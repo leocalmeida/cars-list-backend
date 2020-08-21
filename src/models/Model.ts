@@ -1,9 +1,9 @@
 import {
+  JoinColumn,
   Entity,
   Column,
   PrimaryGeneratedColumn,
   ManyToOne,
-  JoinColumn,
 } from "typeorm";
 import Brand from "../models/Brand";
 
@@ -16,9 +16,9 @@ class Model {
   name: string;
 
   @Column()
-  brandId: number;
+  brand_id: number;
 
-  @ManyToOne(() => Brand)
+  @ManyToOne((type) => Brand)
   @JoinColumn({ name: "brand_id" })
   brand: Brand;
 }

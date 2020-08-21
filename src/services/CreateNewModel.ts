@@ -1,6 +1,6 @@
 import { getRepository } from "typeorm";
 import Model from "../models/Model";
-import Brand from "../models/Model";
+import Brand from "../models/Brand";
 
 interface Request {
   name: string;
@@ -16,8 +16,8 @@ class CreateNewModel {
 
     const model = modelRepository.create({
       name,
+      brand_id,
       brand,
-      brandId: brand_id,
     });
 
     await modelRepository.save(model);
