@@ -1,6 +1,6 @@
 import { getRepository } from "typeorm";
-import Model from "../models/Model";
-import Brand from "../models/Brand";
+import Model from "../../models/Model";
+import Brand from "../../models/Brand";
 
 interface Request {
   name: string;

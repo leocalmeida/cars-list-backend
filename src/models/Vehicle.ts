@@ -4,6 +4,7 @@ import {
   PrimaryGeneratedColumn,
   ManyToOne,
   ManyToMany,
+  JoinTable,
   JoinColumn,
 } from "typeorm";
 
@@ -28,7 +29,7 @@ class Vehicle {
   @Column()
   model_id: number;
 
-  @ManyToMany((type) => Model)
+  @ManyToOne((type) => Model)
   @JoinColumn({ name: "model_id" })
   model: Model;
 

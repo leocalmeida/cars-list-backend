@@ -1,8 +1,8 @@
 import { getRepository } from "typeorm";
 
-import Brand from "../models/Brand";
-import Model from "../models/Model";
-import Vehicle from "../models/Vehicle";
+import Brand from "../../models/Brand";
+import Model from "../../models/Model";
+import Vehicle from "../../models/Vehicle";
 
 interface Request {
   value: number;

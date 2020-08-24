@@ -1,13 +1,16 @@
 import { Router } from "express";
-
 import { getRepository } from "typeorm";
+import ensureAuthenticated from "../middlewares/EnsureAuthenticated";
 
-import CreateNewModel from "../services/CreateNewModel";
+import CreateNewModel from "../services/ModelsServices/CreateNewModel";
+import UpdateModel from "../services/ModelsServices/UpdateModel";
+import DeleteModel from "../services/ModelsServices/DeleteModel";
+
 import Model from "../models/Model";
 
 const modelRouter = Router();
 
-modelRouter.post("/", async (request, response) => {
+modelRouter.post("/", ensureAuthenticated, async (request, response) => {
   const { name, brand_id } = request.body;
 
   const createNewModel = new CreateNewModel();
@@ -20,14 +23,52 @@ modelRouter.post("/", async (request, response) => {
   return response.json(model);
 });
 
-modelRouter.put("/:id", async (request, response) => {});
-modelRouter.delete("/:id", async (request, response) => {});
-modelRouter.get("/:id", async (request, response) => {});
+modelRouter.patch("/:id", ensureAuthenticated, async (request, response) => {
+  const { id } = request.params;
+  const { name, brand_id } = request.body;
+  const updateModel = new UpdateModel();
+  const model = await updateModel.execute({
+    id,
+    name,
+    brand_id,
+  });
+  return response.json(model);
+});
 
-modelRouter.get("/", async (request, response) => {
+modelRouter.delete("/:id", ensureAuthenticated, async (request, response) => {
+  const { id } = request.params;
+  const deleteModel = new DeleteModel();
+  const excludedModel = await deleteModel.execute({
+    id,
+  });
+
+  return response.json(excludedModel);
+});
+
+modelRouter.get("/:id", ensureAuthenticated, async (request, response) => {
+  const { id } = request.params;
   const modelRepository = getRepository(Model);
-  const models = await modelRepository.find();
+  const models = await modelRepository.find({
+    where: {
+      id,
+    },
+    order: {
+      id: "ASC",
+    },
+  });
 
   return response.json(models);
 });
+
+modelRouter.get("/", async (request, response) => {
+  const modelRepository = getRepository(Model);
+  const models = await modelRepository.find({
+    order: {
+      id: "ASC",
+    },
+  });
+
+  return response.json(models);
+});
+
 export default modelRouter;

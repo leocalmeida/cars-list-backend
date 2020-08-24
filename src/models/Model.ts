@@ -5,6 +5,7 @@ import {
   PrimaryGeneratedColumn,
   ManyToOne,
 } from "typeorm";
+
 import Brand from "../models/Brand";
 
 @Entity("models")
