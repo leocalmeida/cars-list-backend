@@ -48,7 +48,7 @@ modelRouter.delete("/:id", ensureAuthenticated, async (request, response) => {
 modelRouter.get("/:id", ensureAuthenticated, async (request, response) => {
   const { id } = request.params;
   const modelRepository = getRepository(Model);
-  const models = await modelRepository.find({
+  const model = await modelRepository.findOne({
     where: {
       id,
     },
@@ -56,19 +56,27 @@ modelRouter.get("/:id", ensureAuthenticated, async (request, response) => {
       id: "ASC",
     },
   });
+  delete model?.brand_id;
 
-  return response.json(models);
+  return response.json(model);
 });
 
-modelRouter.get("/", async (request, response) => {
+modelRouter.get("/brand/:brand_id", async (request, response) => {
+  const { brand_id } = request.params;
+  console.log("brand_id", brand_id);
+
   const modelRepository = getRepository(Model);
-  const models = await modelRepository.find({
+  const model = await modelRepository.find({
+    select: ["name", "id"],
+    where: {
+      brand_id,
+    },
     order: {
-      id: "ASC",
+      name: "ASC",
     },
   });
 
-  return response.json(models);
+  return response.json(model);
 });
 
 export default modelRouter;

@@ -4,6 +4,7 @@ import {
   Column,
   PrimaryGeneratedColumn,
   ManyToOne,
+  OneToMany,
 } from "typeorm";
 
 import Brand from "../models/Brand";
@@ -19,7 +20,7 @@ class Model {
   @Column()
   brand_id: number;
 
-  @ManyToOne((type) => Brand)
+  @ManyToOne((type) => Brand, (brand) => brand.id)
   @JoinColumn({ name: "brand_id" })
   brand: Brand;
 }

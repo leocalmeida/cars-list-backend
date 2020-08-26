@@ -11,7 +11,7 @@ class DeleteBrand {
     const brand = await brandRepository.findOne(id);
 
     if (!brand) {
-      throw new Error("brand does not exist");
+      throw new Error("Brand does not exist");
     }
 
     await brandRepository.delete(brand);

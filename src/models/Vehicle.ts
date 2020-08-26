@@ -29,7 +29,7 @@ class Vehicle {
   @Column()
   model_id: number;
 
-  @ManyToOne((type) => Model)
+  @ManyToOne((type) => Model, (model) => model.id)
   @JoinColumn({ name: "model_id" })
   model: Model;
 

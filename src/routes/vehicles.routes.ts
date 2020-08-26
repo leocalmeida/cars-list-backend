@@ -1,12 +1,11 @@
 import { Router } from "express";
-import { getRepository } from "typeorm";
 import ensureAuthenticated from "../middlewares/EnsureAuthenticated";
 
 import CreateNewVehicle from "../services/VehiclesServices/CreateNewVehicle";
 import UpdateVehicle from "../services/VehiclesServices/UpdateVehicle";
 import DeleteVehicle from "../services/VehiclesServices/DeleteVehicle";
-
-import Vehicle from "../models/Vehicle";
+import ListVehicles from "../services/VehiclesServices/ListVehicles";
+import ListVehiclesByModel from "../services/VehiclesServices/ListVehiclesByModel";
 
 const vehicleRouter = Router();
 
@@ -53,20 +52,22 @@ vehicleRouter.delete("/:id", ensureAuthenticated, async (request, response) => {
 
 vehicleRouter.get("/:id", ensureAuthenticated, async (request, response) => {
   const { id } = request.params;
-  const vehicleRepository = getRepository(Vehicle);
+  const listVehicles = new ListVehicles();
 
-  const vehicle = await vehicleRepository.findOne(id);
+  const vehicle = await listVehicles.execute({
+    id,
+  });
 
   return response.json(vehicle);
 });
 
-vehicleRouter.get("/", async (request, response) => {
-  const vehicleRepository = getRepository(Vehicle);
-  const vehicles = await vehicleRepository.find({
-    order: {
-      id: "ASC",
-    },
-  });
+vehicleRouter.get("/model/:model_id", async (request, response) => {
+  const { model_id } = request.params;
+  console.log("model_id", model_id);
+
+  const listVehiclesByModel = new ListVehiclesByModel();
+
+  const vehicles = await listVehiclesByModel.execute({ model_id });
 
   return response.json(vehicles);
 });

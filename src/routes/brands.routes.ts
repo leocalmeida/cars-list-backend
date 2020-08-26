@@ -59,7 +59,7 @@ brandRouter.get("/", async (request, response) => {
   const brandRepository = getRepository(Brand);
   const brands = await brandRepository.find({
     order: {
-      id: "ASC",
+      name: "ASC",
     },
   });
 
