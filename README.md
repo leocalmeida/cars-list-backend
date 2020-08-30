@@ -21,9 +21,11 @@ Check the following link [Step by Step](https://www.notion.so/Step-by-Step-5a9a9
 ### Instruções para rodar o projeto em seu ambiente
 Dê uma olhada no seguinte link [Passo a Passo](https://www.notion.so/Passo-a-Passo-97ccbe5d3df9401fbc662ab97f270355)
 
-## Preview
-Comming soon.
+### Preview
+Aplication Deployed on HEROKU
+You can use my Restful API, using this address like a base_url: https://cars-list-backend.herokuapp.com/
 
-## Visualização
-Em breve.
+### Visualização
+Aplicação Deployed no HEROKU
+Você pode usar minha Restful API, usando este endereço como base_url: https://cars-list-backend.herokuapp.com/
 
