@@ -4,7 +4,7 @@
   "port": "5432",
   "username": "postgres",
   "password": "masterkey",
-  "database": "db_laborit",
+  "database": "db_laborit_test",
   "entities": ["./src/models/*.ts"],
   "migrations": ["./src/database/migrations/*.ts"],
   "cli": {
